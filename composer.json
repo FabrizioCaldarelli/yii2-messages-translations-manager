@@ -1,0 +1,22 @@
+{
+    "name": "fabriziocaldarelli/yii2-messages-translations-manager",
+    "description": "Messages Translations Manager",
+    "type": "yii2-extension",
+    "keywords": ["yii2","extension","messages","translations","i18n"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Fabrizio Caldarelli",
+            "email": "fabriziocaldarelli@negusweb.it",
+            "homepage": "http://www.negusweb.it",
+        }
+    ],
+    "require": {
+        "yiisoft/yii2": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "sfmobile\\ext\\messagesTranslationsManager\\": ""
+        }
+    }
+}
