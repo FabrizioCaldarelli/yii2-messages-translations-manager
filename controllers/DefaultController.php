@@ -75,6 +75,7 @@ class DefaultController extends Controller
                     'category',
                     'message',
                 ],
+                'defaultOrder' => ['id' => SORT_DESC],
             ],            
         ]);
         
