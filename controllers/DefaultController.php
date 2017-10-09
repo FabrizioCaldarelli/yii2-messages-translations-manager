@@ -161,6 +161,8 @@ class DefaultController extends Controller
         
         
         $model = new SourceMessageForm();
+        
+        $model->load(\Yii::$app->request->get());
 
         if ($model->load(Yii::$app->request->post()) && $this->saveModel($model, $languages)) {
             return $this->redirect(['view', 'id' => $model->id]);

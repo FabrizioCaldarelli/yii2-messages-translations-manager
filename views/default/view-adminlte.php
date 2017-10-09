@@ -6,10 +6,11 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model sfmobile\ext\messagesTranslationsManager\models\SourceMessage */
 
-$this->title = $model->id;
+$this->title = sprintf('%s - %s', $model->category, $model->message);
 $this->params['breadcrumbs'][] = ['label' => 'Source Messages', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+
 <?php $this->beginBlock('content-header') ?>
     <h1>
         <?= Html::encode($this->title) ?>
@@ -17,14 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <br />
         
         <div style="margin-top:8px">
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
-                'method' => 'post',
-            ],
-        ]) ?>
+            <?= $this->render('_viewToolbar', ['model' => $model]); ?>
         </div>       
     </h1>
 <?php $this->endBlock() ?>
