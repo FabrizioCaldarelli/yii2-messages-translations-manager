@@ -27,7 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
     
     <div class="box-body">
 
-    <?= $this->render('_view', ['model' => $model]); ?>
+    <?= $this->render('_view', ['model' => $model, 'languages' => $languages]); ?>
     
     </div>
 

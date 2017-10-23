@@ -18,7 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= $this->render('_viewToolbar', ['model' => $model]); ?>
     </p>
 
-    <?= $this->render('_view', ['model' => $model]); ?>
+    <?= $this->render('_view', ['model' => $model, 'languages' => $languages]); ?>
 
 
 </div>

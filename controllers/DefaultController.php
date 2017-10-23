@@ -95,6 +95,7 @@ class DefaultController extends Controller
     public function actionView($id)
     {
         // Input
+        $languages = \Yii::$app->controller->module->languages;
         $isAdminLteLayout = \Yii::$app->controller->module->isAdminLteLayout;
         
         $viewFile = ($isAdminLteLayout)?'view-adminlte':'view';
@@ -102,6 +103,7 @@ class DefaultController extends Controller
         
         return $this->render($viewFile, [
             'model' => $this->findModel($id),
+            'languages' => $languages,
         ]);
     }
 
@@ -125,6 +127,7 @@ class DefaultController extends Controller
                     if($message!=null)
                     {
                         $message->translation = $model->languages[$l];
+                        $message->save();
                     }
                     else
                     {
