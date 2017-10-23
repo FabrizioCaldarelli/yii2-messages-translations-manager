@@ -14,7 +14,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'category')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'message')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'message')->textInput(['maxlength' => true]) ?>
 
     <?php foreach($languages as $l) { ?>
         <?= $form->field($model, 'languages['.$l.']')->label('Lang '.$l)->textInput(['maxlength' => true]) ?>
