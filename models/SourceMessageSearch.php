@@ -33,29 +33,17 @@ class SourceMessageSearch extends SourceMessage
     }
 
     /**
-     * Creates data provider instance with search query applied
+     * Creates query from params
      *
      * @param array $params
      *
-     * @return ActiveDataProvider
+     * @return ActiveQuery
      */
-    public function search($params)
+    public function loadAndSearchQuery($params)
     {
         $query = SourceMessage::find();
 
-        // add conditions that should always apply here
-
-        $dataProvider = new ActiveDataProvider([
-            'query' => $query,
-        ]);
-
         $this->load($params);
-
-        if (!$this->validate()) {
-            // uncomment the following line if you do not want to return any records when validation fails
-            // $query->where('0=1');
-            return $dataProvider;
-        }
 
         // grid filtering conditions
         $query->andFilterWhere([
@@ -64,6 +52,22 @@ class SourceMessageSearch extends SourceMessage
 
         $query->andFilterWhere(['like', 'category', $this->category])
             ->andFilterWhere(['like', 'message', $this->message]);
+
+        return $query;
+    }
+
+    /**
+     * Creates data provider instance with search query applied
+     *
+     * @param ActiveQuery $query
+     *
+     * @return ActiveDataProvider
+     */
+    public function search($query)
+    {
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
 
         return $dataProvider;
     }

@@ -30,7 +30,7 @@ class DefaultController extends Controller
      * Prepare data per index action
      * @return mixed
      */
-    private function dataIndexQuery()
+    private function dataIndexQuery($searchModel)
     {
         // Input
         $sourceMessageTable = \Yii::$app->controller->module->sourceMessageTable;
@@ -41,6 +41,9 @@ class DefaultController extends Controller
         $query = (new \yii\db\Query())
         ->select(['sm.*'])
         ->from($sourceMessageTable.' as sm');
+		
+		if($searchModel->category!=null) $query->andWhere(['like', 'category', $searchModel->category]);		
+		if($searchModel->message!=null) $query->andWhere(['like', 'message', $searchModel->message]);		
         
         foreach($languages as $l)
         {
@@ -58,11 +61,14 @@ class DefaultController extends Controller
      */
     public function actionIndex()
     {
+        $searchModel = new \sfmobile\ext\messagesTranslationsManager\models\SourceMessageSearch();
+		$searchModel->loadAndSearchQuery(\Yii::$app->request->queryParams);
+    	
         // Input
         $languages = \Yii::$app->controller->module->languages;
         $isAdminLteLayout = \Yii::$app->controller->module->isAdminLteLayout;
         
-        $query = $this->dataIndexQuery();
+        $query = $this->dataIndexQuery($searchModel);
         $sql = $query->createCommand()->getRawSql();
 
         $dataProvider = new \yii\data\SqlDataProvider([
@@ -79,11 +85,13 @@ class DefaultController extends Controller
             ],            
         ]);
         
+		
         $viewFile = ($isAdminLteLayout)?'index-adminlte':'index';
         
         return $this->render($viewFile, [
             'languages' => $languages,
             'dataProvider' => $dataProvider,
+            'searchModel' => $searchModel,
         ]);
     }
 
