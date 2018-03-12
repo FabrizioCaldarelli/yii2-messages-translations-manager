@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use yii\helpers\ArrayHelper;
 
 $attributes = [
     'id',
@@ -13,7 +14,7 @@ foreach($languages as $l)
 {
     $attributes[] = [
         'label' => ('Lang '.$l),
-        'value' => $model->languages[$l]
+        'value' => ArrayHelper::getValue($model->languages, $l)
     ];
 }
 
@@ -23,4 +24,3 @@ foreach($languages as $l)
         'model' => $model,
         'attributes' => $attributes,
     ]) ?>
-
